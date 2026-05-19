@@ -1,0 +1,103 @@
+{
+  "timestamp": "20260518_080825",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [
+    {
+      "column": "Age",
+      "issue_type": "missing_values",
+      "severity": "medium",
+      "evidence": "19.87% of values are missing",
+      "proposed_fix": "Consider imputing missing values using mean or median, or use predictive modeling.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Cabin",
+      "issue_type": "high_missing_values",
+      "severity": "high",
+      "evidence": "77.1% of values are missing",
+      "proposed_fix": "Assess the importance of 'Cabin' column. If necessary, impute or transform the feature. Otherwise, consider dropping the column.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Embarked",
+      "issue_type": "missing_values",
+      "severity": "low",
+      "evidence": "0.22% of values are missing",
+      "proposed_fix": "Impute missing values with the mode of the column, which is 'S'.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "missing_values",
+      "column": "Age",
+      "action": {
+        "action": "impute_mean",
+        "column": "Age",
+        "nulls_filled": 177,
+        "fill_value": 29.6991
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "high_missing_values",
+      "column": "Cabin",
+      "action": {
+        "action": "impute_mode",
+        "column": "Cabin",
+        "nulls_filled": 687,
+        "fill_value": "B96 B98"
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "Embarked",
+      "action": {
+        "action": "impute_mode",
+        "column": "Embarked",
+        "nulls_filled": 2,
+        "fill_value": "S"
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "The average fare paid by passengers differs based on their class (Pclass).",
+      "evidence": "The results show different average fares for different classes, with a clear trend of higher mean fares as the class number decreases.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "The average fare paid by passengers differs based on their class (Pclass).",
+      "evidence": "The results show different average fares for different classes, with a clear trend of higher mean fares as the class number decreases.",
+      "chart_path": null,
+      "confidence": "high"
+    }
+  ],
+  "visualizations": [
+    {
+      "chart_type": "heatmap",
+      "file_path": "outputs/charts/correlation_heatmap.png",
+      "caption": "Correlation matrix of numeric columns",
+      "finding_index": null
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_0_boxplot.png",
+      "caption": "Boxplot showing the distribution of fares paid by passengers, categorized by their class (Pclass). This visually highlights the variation in fares across different passenger classes.",
+      "finding_index": 0
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_1_boxplot.png",
+      "caption": "Boxplot showing the distribution of fares paid by passengers in different classes. This visualization helps to highlight the differences in fare distribution across the passenger classes.",
+      "finding_index": 1
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,118 @@
+{
+  "timestamp": "20260517_200541",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [
+    {
+      "column": "Age",
+      "issue_type": "missing_values",
+      "severity": "medium",
+      "evidence": "177 missing values (19.87% of total)",
+      "proposed_fix": "Consider imputing missing values with mean, median, or using a model-based approach for imputation.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Cabin",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": "687 missing values (77.1% of total)",
+      "proposed_fix": "Consider creating a new category for missing values or imputing based on related features if possible.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Embarked",
+      "issue_type": "missing_values",
+      "severity": "low",
+      "evidence": "2 missing values (0.22% of total)",
+      "proposed_fix": "Impute missing values with the most frequent category.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Fare",
+      "issue_type": "outliers",
+      "severity": "low",
+      "evidence": "Fare has a high max of 512.3292 compared to Q75 of 31.0, indicating potential outliers.",
+      "proposed_fix": "Review and handle outliers if they affect model performance.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "missing_values",
+      "column": "Age",
+      "action": {
+        "action": "impute_mean",
+        "column": "Age",
+        "nulls_filled": 177,
+        "fill_value": 29.6991
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "Cabin",
+      "action": {
+        "action": "impute_mode",
+        "column": "Cabin",
+        "nulls_filled": 687,
+        "fill_value": "B96 B98"
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "Embarked",
+      "action": {
+        "action": "impute_mode",
+        "column": "Embarked",
+        "nulls_filled": 2,
+        "fill_value": "S"
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Passengers traveling in higher classes paid significantly higher fares.",
+      "evidence": "Mean fare for 1st class: 84.1547, 2nd class: 20.6622, 3rd class: 13.6756.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers traveling in higher classes paid significantly higher fares.",
+      "evidence": "Mean fare for 1st class: 84.1547, 2nd class: 20.6622, 3rd class: 13.6756.",
+      "chart_path": null,
+      "confidence": "high"
+    }
+  ],
+  "visualizations": [
+    {
+      "chart_type": "heatmap",
+      "file_path": "outputs/charts/correlation_heatmap.png",
+      "caption": "Correlation matrix of numeric columns",
+      "finding_index": null
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_0_boxplot.png",
+      "caption": "Boxplot showing the distribution of fares paid by passengers across different passenger classes.",
+      "finding_index": 0
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_1_boxplot.png",
+      "caption": "Boxplot showing the distribution of fares paid by passengers across different passenger classes.",
+      "finding_index": 1
+    }
+  ],
+  "errors": [
+    {
+      "agent": "eda",
+      "error": "Expecting value: line 5 column 17 (char 121)",
+      "phase": "eda"
+    }
+  ]
+}

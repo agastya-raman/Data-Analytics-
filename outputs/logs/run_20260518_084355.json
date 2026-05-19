@@ -1,0 +1,140 @@
+{
+  "timestamp": "20260518_084355",
+  "dataset": "data/uploads/dataset_20260518_084227.csv",
+  "quality_issues": [
+    {
+      "column": "ratinglevel",
+      "issue_type": "null_values",
+      "severity": "medium",
+      "evidence": "Missing values in 59 out of 1000 records (5.9%)",
+      "proposed_fix": "Consider imputing missing values with a placeholder or use content-based inference to fill",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "ratingdescription",
+      "issue_type": "data_type_mismatch",
+      "severity": "high",
+      "evidence": "Column is labeled as 'int64' but contains text-based descriptions",
+      "proposed_fix": "Convert 'ratingdescription' to 'str' type to reflect its content",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "user_rating_score",
+      "issue_type": "null_values",
+      "severity": "high",
+      "evidence": "Missing values in 395 out of 1000 records (39.5%)",
+      "proposed_fix": "Investigate the cause of missing values, consider imputation or removal if missing at random",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "user_rating_size",
+      "issue_type": "low_cardinality",
+      "severity": "low",
+      "evidence": "Column has only 3 unique values",
+      "proposed_fix": "Evaluate if the column provides significant analytical value or consider re-encoding",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "release_year",
+      "issue_type": "out_of_range_values",
+      "severity": "medium",
+      "evidence": "The 'min' is set to 1940, which might be out of range for intended datasets",
+      "proposed_fix": "Verify the release year data to ensure it's within the expected range or correct if necessary",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "null_values",
+      "column": "ratinglevel",
+      "action": {
+        "action": "impute_mode",
+        "column": "ratinglevel",
+        "nulls_filled": 59,
+        "fill_value": "Parents strongly cautioned. May be unsuitable for children ages 14 and under."
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "null_values",
+      "column": "user_rating_score",
+      "action": {
+        "action": "impute_mean",
+        "column": "user_rating_score",
+        "nulls_filled": 395,
+        "fill_value": 84.0942
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Movies with higher ratings tend to have higher user rating scores.",
+      "evidence": "The correlation between rating description and user rating score is 0.224.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies released in more recent years have higher user rating scores.",
+      "evidence": "The correlation between release year and user rating score is 0.2217.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher rating levels tend to be released in more recent years.",
+      "evidence": "Correlation between ratingdescription and release_year is 0.408.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher ratings tend to have higher user rating scores.",
+      "evidence": "The correlation between rating description and user rating score is 0.224.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies released in more recent years have higher user rating scores.",
+      "evidence": "The correlation between release year and user rating score is 0.2217.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher rating levels tend to be released in more recent years.",
+      "evidence": "Correlation between ratingdescription and release_year is 0.408.",
+      "chart_path": null,
+      "confidence": "medium"
+    }
+  ],
+  "visualizations": [
+    {
+      "chart_type": "heatmap",
+      "file_path": "outputs/charts/correlation_heatmap.png",
+      "caption": "Correlation matrix of numeric columns",
+      "finding_index": null
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_0_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores across different movie ratings",
+      "finding_index": 0
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_3_boxplot.png",
+      "caption": "The boxplot shows the distribution of user rating scores for different movie ratings, indicating a trend where movies with higher ratings tend to have higher median user rating scores.",
+      "finding_index": 3
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_5_boxplot.png",
+      "caption": "Boxplot showing the distribution of release years for different rating levels, illustrating that movies with higher rating levels tend to be released in more recent years.",
+      "finding_index": 5
+    }
+  ],
+  "errors": []
+}

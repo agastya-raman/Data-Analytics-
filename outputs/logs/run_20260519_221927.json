@@ -1,0 +1,197 @@
+{
+  "timestamp": "20260519_221927",
+  "dataset": "data/uploads/dataset_20260519_221612.csv",
+  "quality_issues": [
+    {
+      "column": "ratinglevel",
+      "issue_type": "null_values",
+      "severity": "medium",
+      "evidence": "59 null values present out of 1000 records (5.9% null percentage)",
+      "proposed_fix": "Analyze missing data context; consider imputing with a placeholder or relevant category.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "ratingdescription",
+      "issue_type": "data_type_mismatch",
+      "severity": "high",
+      "evidence": "Data type is int64, which might indicate inappropriate data type for descriptions.",
+      "proposed_fix": "Verify if numeric representation of descriptions is correct or change dtype to str.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "user_rating_score",
+      "issue_type": "null_values",
+      "severity": "high",
+      "evidence": "395 null values present out of 1000 records (39.5% null percentage)",
+      "proposed_fix": "Consider imputation strategies (e.g., mean or median) dependent on use case.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "user_rating_size",
+      "issue_type": "low_cardinality",
+      "severity": "low",
+      "evidence": "Only 3 unique values detected across 1000 records.",
+      "proposed_fix": "Verify if column low variability is expected; consider altering or analyzing for issues.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "null_values",
+      "column": "ratinglevel",
+      "action": {
+        "action": "impute_mode",
+        "column": "ratinglevel",
+        "nulls_filled": 59,
+        "fill_value": "Parents strongly cautioned. May be unsuitable for children ages 14 and under."
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "null_values",
+      "column": "user_rating_score",
+      "action": {
+        "action": "impute_mean",
+        "column": "user_rating_score",
+        "nulls_filled": 395,
+        "fill_value": 84.0942
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Movies with higher ratings have higher user rating scores.",
+      "evidence": "The correlation between rating description and user rating score is 0.224.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Recent movies have higher user rating scores compared to older movies.",
+      "evidence": "Correlation between release_year and user_rating_score is 0.2217.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher rating levels tend to have higher user rating scores.",
+      "evidence": "The correlation between ratingdescription and user_rating_score is 0.224.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher user rating sizes tend to have lower rating descriptions.",
+      "evidence": "The correlation coefficient between user_rating_size and ratingdescription is -0.2262, indicating a small negative relationship.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher rating descriptions have higher user rating scores.",
+      "evidence": "The correlation between 'ratingdescription' and 'user_rating_score' is 0.224.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher ratings have higher user rating scores.",
+      "evidence": "The correlation between rating description and user rating score is 0.224.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Recent movies have higher user rating scores compared to older movies.",
+      "evidence": "Correlation between release_year and user_rating_score is 0.2217.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher rating levels tend to have higher user rating scores.",
+      "evidence": "The correlation between ratingdescription and user_rating_score is 0.224.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher user rating sizes tend to have lower rating descriptions.",
+      "evidence": "The correlation coefficient between user_rating_size and ratingdescription is -0.2262, indicating a small negative relationship.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies with higher rating descriptions have higher user rating scores.",
+      "evidence": "The correlation between 'ratingdescription' and 'user_rating_score' is 0.224.",
+      "chart_path": null,
+      "confidence": "medium"
+    }
+  ],
+  "visualizations": [
+    {
+      "chart_type": "heatmap",
+      "file_path": "outputs/charts/correlation_heatmap.png",
+      "caption": "Correlation matrix of numeric columns",
+      "finding_index": null
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_0_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores across different movie ratings.",
+      "finding_index": 0
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_1_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores by release year to compare recent movies with older ones.",
+      "finding_index": 1
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_2_boxplot.png",
+      "caption": "Distribution of user rating scores across different rating levels.",
+      "finding_index": 2
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_3_boxplot.png",
+      "caption": "Boxplot showing the distribution of rating descriptions across different user rating sizes.",
+      "finding_index": 3
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_4_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores across different rating descriptions.",
+      "finding_index": 4
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_5_boxplot.png",
+      "caption": "This boxplot visualizes the distribution of user rating scores across different movie ratings, illustrating that movies with higher ratings tend to have higher user rating scores.",
+      "finding_index": 5
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_6_boxplot.png",
+      "caption": "Boxplot comparing user rating scores of movies across different release years.",
+      "finding_index": 6
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_7_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores across different rating levels. Higher rating levels may correspond to higher user rating scores.",
+      "finding_index": 7
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_8_boxplot.png",
+      "caption": "This boxplot visualizes the relationship between user rating sizes and rating descriptions, highlighting the trend that movies with higher user rating sizes tend to have lower rating descriptions.",
+      "finding_index": 8
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_9_boxplot.png",
+      "caption": "Boxplot showing the relationship between rating descriptions and user rating scores.",
+      "finding_index": 9
+    }
+  ],
+  "errors": []
+}

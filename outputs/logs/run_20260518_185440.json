@@ -1,0 +1,151 @@
+{
+  "timestamp": "20260518_185440",
+  "dataset": "data/uploads/dataset_20260518_185323.csv",
+  "quality_issues": [
+    {
+      "column": "rating",
+      "issue_type": "duplicate_values_in_sample",
+      "severity": "low",
+      "evidence": [
+        "TV-14",
+        "TV-14"
+      ],
+      "proposed_fix": "Ensure sample values are unique or provide more distinct sample values.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "ratinglevel",
+      "issue_type": "missing_values",
+      "severity": "low",
+      "evidence": {
+        "null_count": 59,
+        "null_pct": 5.9
+      },
+      "proposed_fix": "Investigate missing values and provide appropriate replacements if necessary.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "ratingdescription",
+      "issue_type": "incorrect_dtype",
+      "severity": "medium",
+      "evidence": "Expected string, found int64",
+      "proposed_fix": "Change the data type to string to reflect descriptive content.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "user_rating_score",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": {
+        "null_count": 395,
+        "null_pct": 39.5
+      },
+      "proposed_fix": "Consult with domain experts to fill in missing user ratings or impute with average score.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "user_rating_size",
+      "issue_type": "low_cardinality",
+      "severity": "low",
+      "evidence": {
+        "cardinality": 3,
+        "sample_values": [
+          80,
+          82,
+          80,
+          80,
+          80
+        ]
+      },
+      "proposed_fix": "Consider verifying if such low cardinality is expected or issue in data collection.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "duplicate_values_in_sample",
+      "column": "rating",
+      "action": {
+        "action": "drop_duplicates",
+        "rows_before": 1000,
+        "rows_after": 500,
+        "rows_removed": 500
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "ratinglevel",
+      "action": {
+        "action": "impute_mode",
+        "column": "ratinglevel",
+        "nulls_filled": 33,
+        "fill_value": "Parents strongly cautioned. May be unsuitable for children ages 14 and under."
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "user_rating_score",
+      "action": {
+        "action": "impute_mean",
+        "column": "user_rating_score",
+        "nulls_filled": 244,
+        "fill_value": 81.3984
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Movies with higher rating levels tend to have higher average user rating scores.",
+      "evidence": "The correlation between rating description and user rating score is 0.1335.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies released in more recent years tend to have higher user rating scores.",
+      "evidence": "The correlation between release year and user rating score is 0.1608.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies released in more recent years tend to have higher user rating scores.",
+      "evidence": "The correlation between release year and user rating score is 0.1608.",
+      "chart_path": null,
+      "confidence": "medium"
+    }
+  ],
+  "visualizations": [
+    {
+      "chart_type": "heatmap",
+      "file_path": "outputs/charts/correlation_heatmap.png",
+      "caption": "Correlation matrix of numeric columns",
+      "finding_index": null
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_0_boxplot.png",
+      "caption": "A boxplot to visualize the distribution of user rating scores across different rating levels, confirming whether movies with higher rating levels have higher average user rating scores.",
+      "finding_index": 0
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_1_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores across different release years.",
+      "finding_index": 1
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_2_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores for movies across different release years.",
+      "finding_index": 2
+    }
+  ],
+  "errors": []
+}

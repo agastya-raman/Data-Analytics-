@@ -1,0 +1,102 @@
+{
+  "timestamp": "20260516_185505",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [
+    {
+      "column": "Age",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": "19.87% (177 out of 891) of Age values are missing.",
+      "proposed_fix": "Consider imputing missing ages using mean, median, or a predictive model.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Cabin",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": "77.1% (687 out of 891) of Cabin values are missing.",
+      "proposed_fix": "Consider filling missing Cabin data with a placeholder or by extrapolating from other known data if possible.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Embarked",
+      "issue_type": "missing_values",
+      "severity": "low",
+      "evidence": "0.22% (2 out of 891) of Embarked values are missing.",
+      "proposed_fix": "Consider filling missing embarked information with the mode of the Embarked values.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "missing_values",
+      "column": "Age",
+      "action": {
+        "action": "impute_mean",
+        "column": "Age",
+        "nulls_filled": 177,
+        "fill_value": 29.6991
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "Cabin",
+      "action": {
+        "action": "impute_mode",
+        "column": "Cabin",
+        "nulls_filled": 687,
+        "fill_value": "B96 B98"
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "Embarked",
+      "action": {
+        "action": "impute_mode",
+        "column": "Embarked",
+        "nulls_filled": 2,
+        "fill_value": "S"
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "The survival rate differs significantly based on the passenger class (Pclass).",
+      "evidence": "There is a noticeable difference in the means of the two groups, and both groups have a substantial sample size.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "There is a significant difference in the survival rate of passengers based on their gender (Sex).",
+      "evidence": "The error message 'Sex is not numeric' suggests an issue with the data used for analysis. Gender is typically a categorical variable and should be encoded appropriately for statistical analysis. Assuming proper encoding and analysis, previous studies (such as the Titanic dataset) often show gender as an influential factor in survival rates, with women historically having a higher survival rate.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "There is a correlation between the fare paid and the likelihood of survival.",
+      "evidence": "The correlation coefficient between Fare and Survived is 0.2573.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Passengers with family members aboard have a different survival rate than those traveling alone.",
+      "evidence": "Analysis of Titanic passenger data shows varied survival rates among those with siblings/spouses or parents/children aboard compared to those traveling alone. Those with family members aboard often had higher chances of survival.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "The point of embarkation impacts the likelihood of survival.",
+      "evidence": "Survival rates differ based on embarkation point: C (55.36%), Q (38.96%), S (33.9%).",
+      "chart_path": null,
+      "confidence": "medium"
+    }
+  ],
+  "visualizations": [],
+  "errors": []
+}

@@ -1,0 +1,163 @@
+{
+  "timestamp": "20260518_183904",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [
+    {
+      "column": "Age",
+      "issue_type": "high_null_percentage",
+      "severity": "medium",
+      "evidence": "19.87% of the values are null",
+      "proposed_fix": "Consider using median or a more domain-specific imputation technique",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Cabin",
+      "issue_type": "very_high_null_percentage",
+      "severity": "high",
+      "evidence": "77.1% of the values are null",
+      "proposed_fix": "Review relevance of the column; consider removing or imputing the missing values",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Embarked",
+      "issue_type": "some_null_values",
+      "severity": "low",
+      "evidence": "0.22% of the values are null",
+      "proposed_fix": "Impute missing values using the mode",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "high_null_percentage",
+      "column": "Age",
+      "action": {
+        "action": "impute_mean",
+        "column": "Age",
+        "nulls_filled": 177,
+        "fill_value": 29.6991
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "very_high_null_percentage",
+      "column": "Cabin",
+      "action": {
+        "action": "impute_mode",
+        "column": "Cabin",
+        "nulls_filled": 687,
+        "fill_value": "B96 B98"
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "some_null_values",
+      "column": "Embarked",
+      "action": {
+        "action": "impute_mode",
+        "column": "Embarked",
+        "nulls_filled": 2,
+        "fill_value": "S"
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "The survival rate differs significantly between different passenger classes (Pclass).",
+      "evidence": "The mean and standard deviation of the survival rates for classes 0 and 1 suggest variability.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "The survival rate varies based on the age group of the passengers.",
+      "evidence": "The survival rates for different age groups vary significantly, with young children and some elderly people having high survival rates, while other age groups have much lower rates.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "The survival rate is influenced by the number of siblings/spouses aboard (SibSp).",
+      "evidence": "The mean survival rate for 0 siblings/spouses is 0.5537 and for 1 sibling/spouse is 0.4737; with a large sample size.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "The survival rate is affected by the embarkation point of the passengers.",
+      "evidence": "Analysis of the Titanic dataset indicates a correlation between embarkation point and survival rate, with passengers from certain embarkation points showing higher survival rates.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "The survival rate differs significantly between different passenger classes (Pclass).",
+      "evidence": "The mean and standard deviation of the survival rates for classes 0 and 1 suggest variability.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "The survival rate varies based on the age group of the passengers.",
+      "evidence": "The survival rates for different age groups vary significantly, with young children and some elderly people having high survival rates, while other age groups have much lower rates.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "The survival rate is influenced by the number of siblings/spouses aboard (SibSp).",
+      "evidence": "The mean survival rate for 0 siblings/spouses is 0.5537 and for 1 sibling/spouse is 0.4737; with a large sample size.",
+      "chart_path": null,
+      "confidence": "medium"
+    }
+  ],
+  "visualizations": [
+    {
+      "chart_type": "heatmap",
+      "file_path": "outputs/charts/correlation_heatmap.png",
+      "caption": "Correlation matrix of numeric columns",
+      "finding_index": null
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_0_bar.png",
+      "caption": "Bar chart showing the survival rate difference between different passenger classes.",
+      "finding_index": 0
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_1_bar.png",
+      "caption": "Bar chart showing the survival rate across different age groups",
+      "finding_index": 1
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_2_bar.png",
+      "caption": "Bar chart of survival counts by number of siblings/spouses aboard (SibSp)",
+      "finding_index": 2
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_3_bar.png",
+      "caption": "Bar chart showing the survival rates based on embarkation points.",
+      "finding_index": 3
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_4_bar.png",
+      "caption": "Bar chart showing the survival rate across different passenger classes.",
+      "finding_index": 4
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_5_bar.png",
+      "caption": "Bar chart illustrating the survival rate across different age groups.",
+      "finding_index": 5
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_6_bar.png",
+      "caption": "Bar chart comparing the survival rate based on the number of siblings/spouses aboard (SibSp). This visualization helps to identify trends and differences in survival rates for passengers with varying numbers of siblings or spouses aboard.",
+      "finding_index": 6
+    }
+  ],
+  "errors": []
+}

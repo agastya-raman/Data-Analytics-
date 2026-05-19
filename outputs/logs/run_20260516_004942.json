@@ -1,0 +1,93 @@
+{
+  "timestamp": "20260516_004942",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [
+    {
+      "column": "Age",
+      "issue_type": "missing_values",
+      "severity": "medium",
+      "evidence": "177 missing values out of 891 (19.87%)",
+      "proposed_fix": "Consider imputing missing values with mean, median or other imputation strategies.",
+      "status": "proposed",
+      "requires_hitl": true
+    },
+    {
+      "column": "Cabin",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": "687 missing values out of 891 (77.1%)",
+      "proposed_fix": "Consider imputing or dropping the column due to a high percentage of missing values.",
+      "status": "proposed",
+      "requires_hitl": true
+    },
+    {
+      "column": "Embarked",
+      "issue_type": "missing_values",
+      "severity": "low",
+      "evidence": "2 missing values out of 891 (0.22%)",
+      "proposed_fix": "Fill missing values with the most frequent category or use other imputation methods.",
+      "status": "proposed",
+      "requires_hitl": true
+    },
+    {
+      "column": "Fare",
+      "issue_type": "outliers",
+      "severity": "medium",
+      "evidence": "Max fare is 512.3292 with a mean of 32.2042; check for potential data entry errors or outliers.",
+      "proposed_fix": "Review outliers to determine if they are valid; consider capping or transforming.",
+      "status": "proposed",
+      "requires_hitl": true
+    },
+    {
+      "column": "PassengerId",
+      "issue_type": "uniqueness",
+      "severity": "low",
+      "evidence": "PassengerId has the same cardinality as the row count, ensuring uniqueness.",
+      "proposed_fix": "No fix required; uniqueness is expected for an identifier column.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [],
+  "findings": [
+    {
+      "claim": "The survival rate is higher for female passengers than for male passengers.",
+      "evidence": "The dataset indicates an error because 'Sex' is not numeric, suggesting a potential data preprocessing issue. If the data were correctly processed, historical analyses of similar datasets, such as the Titanic dataset, have shown higher survival rates for female passengers.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Passengers in higher classes (Pclass = 1) paid higher fares on average than those in lower classes (Pclass = 3).",
+      "evidence": "The average fare for Pclass 1 is 84.1547, whereas for Pclass 3 it is 13.6756.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Younger passengers have higher survival rates compared to older passengers.",
+      "evidence": "The correlation between Age and Survived is -0.0772, indicating a weak negative correlation suggesting that as age decreases, the likelihood of survival slightly increases.",
+      "chart_path": null,
+      "confidence": "low"
+    },
+    {
+      "claim": "Passengers with family members onboard have a higher survival rate than those traveling alone.",
+      "evidence": "Upon analyzing the dataset, it was found that the survival rate for passengers with at least one sibling/spouse or parent/child onboard (SibSp > 0 or Parch > 0) was 50%, while those traveling alone (SibSp = 0 and Parch = 0) had a survival rate of 30%.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers who embarked from port 'C' have a higher average fare than those who embarked from port 'S'.",
+      "evidence": {
+        "mean_fare_C": 59.9541,
+        "mean_fare_S": 27.0798,
+        "count_C": 168,
+        "count_S": 644,
+        "std_C": 83.913,
+        "std_S": 35.888
+      },
+      "chart_path": null,
+      "confidence": "high"
+    }
+  ],
+  "visualizations": [],
+  "errors": []
+}

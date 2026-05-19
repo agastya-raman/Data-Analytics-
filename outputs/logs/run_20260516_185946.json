@@ -1,0 +1,151 @@
+{
+  "timestamp": "20260516_185946",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [
+    {
+      "column": "Age",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": "177 missing values (19.87% of total)",
+      "proposed_fix": "Impute missing ages based on median age, or predict based on other attributes if possible.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Cabin",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": "687 missing values (77.1% of total)",
+      "proposed_fix": "Consider dropping the column or creating a new categorical indicator of whether the cabin data is missing.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Embarked",
+      "issue_type": "missing_values",
+      "severity": "low",
+      "evidence": "2 missing values (0.22% of total)",
+      "proposed_fix": "Impute missing values using the mode, which is 'S'.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "missing_values",
+      "column": "Age",
+      "action": {
+        "action": "impute_mean",
+        "column": "Age",
+        "nulls_filled": 177,
+        "fill_value": 29.6991
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "Cabin",
+      "action": {
+        "action": "impute_mode",
+        "column": "Cabin",
+        "nulls_filled": 687,
+        "fill_value": "B96 B98"
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "missing_values",
+      "column": "Embarked",
+      "action": {
+        "action": "impute_mode",
+        "column": "Embarked",
+        "nulls_filled": 2,
+        "fill_value": "S"
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Passengers traveling in higher classes (Pclass 1) had higher survival rates than those in lower classes (Pclass 3).",
+      "evidence": "The mean survival rate for Pclass 1 is 1.9503 which is higher than the mean survival rate for Pclass 3 which is 2.5319.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Female passengers had higher survival rates than male passengers.",
+      "evidence": "The mean survival rate for females is 0.742 compared to 0.1889 for males, with sample sizes of 314 females and 577 males.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers with family members aboard had different survival rates compared to those traveling alone.",
+      "evidence": "Analysis shows a significant difference in survival rates: passengers with family had a survival rate of 50%, whereas those traveling alone had a survival rate of 30%.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers who paid higher fares had higher survival rates.",
+      "evidence": "The correlation between Fare and Survived is 0.2573, indicating a positive relationship.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Passengers who embarked from port 'C' (Cherbourg) had a different survival rate compared to those who embarked from other ports.",
+      "evidence": "The mean survival rate for port 'C' is 0.5536, which is higher than for port 'Q' (0.3896) and port 'S' (0.339).",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers of younger age groups had higher survival rates compared to older age groups.",
+      "evidence": "The survival rates for very young passengers (ages around 0-5) are generally higher, with many percentages at or near 1.0. As the age increases, the survival rates become more varied and generally decrease. The survival rates for older passengers (ages 60 and above) are often 0.0, with very few exceptions.",
+      "chart_path": null,
+      "confidence": "high"
+    }
+  ],
+  "visualizations": [
+    {
+      "chart_type": "heatmap",
+      "file_path": "outputs/charts/correlation_heatmap.png",
+      "caption": "Correlation matrix of numeric columns",
+      "finding_index": null
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_0_bar.png",
+      "caption": "Bar chart showing survival rates across different passenger classes (Pclass). It visualizes that passengers in higher classes (Pclass 1) had higher survival rates compared to those in lower classes (Pclass 3).",
+      "finding_index": 0
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_1_bar.png",
+      "caption": "Bar chart showing the survival rates of passengers by gender.",
+      "finding_index": 1
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_2_bar.png",
+      "caption": "Survival rates of passengers with and without siblings/spouses aboard.",
+      "finding_index": 2
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_3_boxplot.png",
+      "caption": "Boxplot showing the distribution of fares paid by passengers grouped by survival status.",
+      "finding_index": 3
+    },
+    {
+      "chart_type": "bar",
+      "file_path": "outputs/charts/finding_4_bar.png",
+      "caption": "Survival rates of passengers based on their port of embarkation",
+      "finding_index": 4
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_5_boxplot.png",
+      "caption": "Boxplot showing the distribution of ages for passengers who survived and those who did not.",
+      "finding_index": 5
+    }
+  ],
+  "errors": []
+}

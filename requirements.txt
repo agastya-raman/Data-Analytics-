@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+python-multipart
+langgraph
+langchain
+langchain-openai
+langchain-core
+pandas
+numpy
+scipy
+scikit-learn
+matplotlib
+seaborn
+plotly
+python-dotenvs
+pydantic
+langsmith

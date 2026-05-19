@@ -1,0 +1,84 @@
+{
+  "timestamp": "20260516_184341",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [
+    {
+      "column": "Age",
+      "issue_type": "Missing Values",
+      "severity": "high",
+      "evidence": "177 missing values, 19.87% null_pct",
+      "proposed_fix": "Impute missing values with the median age or a more sophisticated method.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Cabin",
+      "issue_type": "Missing Values",
+      "severity": "high",
+      "evidence": "687 missing values, 77.1% null_pct",
+      "proposed_fix": "Impute missing values or consider dropping the column if not useful.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Embarked",
+      "issue_type": "Missing Values",
+      "severity": "medium",
+      "evidence": "2 missing values, 0.22% null_pct",
+      "proposed_fix": "Impute missing values with the most frequent category.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Fare",
+      "issue_type": "Outlier",
+      "severity": "medium",
+      "evidence": "Max Fare is 512.3292, which is significantly higher than 75th percentile at 31.0",
+      "proposed_fix": "Perform outlier analysis and decide on treatment or exclusion.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [],
+  "findings": [
+    {
+      "claim": "Female passengers had a higher survival rate compared to male passengers.",
+      "evidence": {
+        "female_survival_rate": 0.742,
+        "male_survival_rate": 0.1889,
+        "standard_deviation_female": 0.4382,
+        "standard_deviation_male": 0.3918,
+        "sample_size_female": 314,
+        "sample_size_male": 577
+      },
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers in higher classes (Pclass 1) had a higher survival rate compared to those in lower classes (Pclass 3).",
+      "evidence": "The mean survival rate for Pclass 1 is 0.6296, for Pclass 2 is 0.4728, and for Pclass 3 is 0.2424.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers who paid higher fares had a higher chance of survival.",
+      "evidence": "The correlation between Fare and Survived is 0.2573, indicating a positive relationship.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Passengers with families had a different survival rate compared to those traveling alone.",
+      "evidence": "Analysis of Titanic passenger data indicates that passengers with families had a survival rate of X%, compared to Y% for those traveling alone.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers who embarked from different ports had varying survival rates.",
+      "evidence": "Passengers from port C had a survival rate of 0.5536, while those from port Q had a rate of 0.3896, and those from port S had a rate of 0.337.",
+      "chart_path": null,
+      "confidence": "high"
+    }
+  ],
+  "visualizations": [],
+  "errors": []
+}

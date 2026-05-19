@@ -1,0 +1,146 @@
+{
+  "timestamp": "20260518_193421",
+  "dataset": "data/uploads/dataset_20260518_193303.csv",
+  "quality_issues": [
+    {
+      "column": "ratinglevel",
+      "issue_type": "null_values_present",
+      "severity": "medium",
+      "evidence": "Null count is 59 out of 1000 (5.9% null_pct)",
+      "proposed_fix": "Review and populate missing 'ratinglevel' entries where possible.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "ratingdescription",
+      "issue_type": "incorrect_data_type",
+      "severity": "high",
+      "evidence": "Expected data type is 'str', but 'int64' was observed.",
+      "proposed_fix": "Convert 'ratingdescription' to 'str' if textual description is expected; otherwise, rename to reflect numeric scores.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "user_rating_score",
+      "issue_type": "high_null_percentage",
+      "severity": "high",
+      "evidence": "Null count is 395 out of 1000 (39.5% null_pct).",
+      "proposed_fix": "Investigate source data to determine if nulls can be reduced or explain the high absence rate.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "user_rating_size",
+      "issue_type": "low_cardinality",
+      "severity": "low",
+      "evidence": "Cardinality is only 3, indicating repetitive data across 1000 entries.",
+      "proposed_fix": "Verify if this column is necessary or if its value can be represented more effectively.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "release_year",
+      "issue_type": "out_of_range_values",
+      "severity": "low",
+      "evidence": "Minimum release year is 1940, which could be out of range for intended dataset focus.",
+      "proposed_fix": "Review dataset focus and adjust 'release_year' bounds if necessary.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [
+    {
+      "issue_type": "null_values_present",
+      "column": "ratinglevel",
+      "action": {
+        "action": "impute_mode",
+        "column": "ratinglevel",
+        "nulls_filled": 59,
+        "fill_value": "Parents strongly cautioned. May be unsuitable for children ages 14 and under."
+      },
+      "status": "applied"
+    },
+    {
+      "issue_type": "high_null_percentage",
+      "column": "user_rating_score",
+      "action": {
+        "action": "impute_mean",
+        "column": "user_rating_score",
+        "nulls_filled": 395,
+        "fill_value": 84.0942
+      },
+      "status": "applied"
+    }
+  ],
+  "findings": [
+    {
+      "claim": "Movies with higher ratings from the 'rating' column tend to have higher user_rating_scores.",
+      "evidence": "The correlation coefficient between ratingdescription and user_rating_score is 0.224, indicating a weak positive relationship.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Movies released in recent years have a higher average user_rating_score.",
+      "evidence": "In 2016 and 2017, average scores were 85.9715 and 87.9567, respectively, which are among the highest. Earlier years, such as 1990, 1991, 1992, recorded lower averages.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "The distribution of movies by 'ratinglevel' shows a significant difference in their average user_rating_score.",
+      "evidence": "There are multiple distinct 'ratinglevel' categories with different means for user_rating_score, ranging from as low as 56.0 to as high as 97.0, and standard deviations also vary for larger categories.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Movies released in recent years have a higher average user_rating_score.",
+      "evidence": "In 2016 and 2017, average scores were 85.9715 and 87.9567, respectively, which are among the highest. Earlier years, such as 1990, 1991, 1992, recorded lower averages.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "The distribution of movies by 'ratinglevel' shows a significant difference in their average user_rating_score.",
+      "evidence": "There are multiple distinct 'ratinglevel' categories with different means for user_rating_score, ranging from as low as 56.0 to as high as 97.0, and standard deviations also vary for larger categories.",
+      "chart_path": null,
+      "confidence": "high"
+    }
+  ],
+  "visualizations": [
+    {
+      "chart_type": "heatmap",
+      "file_path": "outputs/charts/correlation_heatmap.png",
+      "caption": "Correlation matrix of numeric columns",
+      "finding_index": null
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_0_boxplot.png",
+      "caption": "Boxplot comparing the distribution of user rating scores across different movie ratings.",
+      "finding_index": 0
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_1_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores for movies released in different years, highlighting the trend of higher average user rating scores in recent years.",
+      "finding_index": 1
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_2_boxplot.png",
+      "caption": "The boxplot shows the distribution of user rating scores across different rating levels, highlighting any significant differences in their averages.",
+      "finding_index": 2
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_3_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores for movies released in recent years compared to earlier years.",
+      "finding_index": 3
+    },
+    {
+      "chart_type": "boxplot",
+      "file_path": "outputs/charts/finding_4_boxplot.png",
+      "caption": "Boxplot showing the distribution of user rating scores across different rating levels to highlight the significant differences.",
+      "finding_index": 4
+    }
+  ],
+  "errors": []
+}

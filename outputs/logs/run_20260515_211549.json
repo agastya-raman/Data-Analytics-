@@ -1,0 +1,15 @@
+{
+  "timestamp": "20260515_211549",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [],
+  "cleaning_log": [],
+  "findings": [],
+  "visualizations": [],
+  "errors": [
+    {
+      "agent": "eda",
+      "error": "dtype 'str' does not support operation 'mean'",
+      "phase": "eda"
+    }
+  ]
+}

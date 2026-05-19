@@ -1,0 +1,97 @@
+{
+  "timestamp": "20260516_003815",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [],
+  "cleaning_log": [],
+  "findings": [
+    {
+      "claim": "There is a relationship between the Pclass of the passenger and their survival.",
+      "evidence": {
+        "class_1_survival_rate": 0.6296,
+        "class_2_survival_rate": 0.4728,
+        "class_3_survival_rate": 0.2424,
+        "class_counts": {
+          "1": 216,
+          "2": 184,
+          "3": 491
+        }
+      },
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "There is a relationship between the Sex of the passenger and their survival.",
+      "evidence": "The mean survival rate for females is 0.742, while for males it is 0.1889, indicating a significant difference in survival rates. A higher number of females (314) had a higher survival rate compared to males (577). Standard deviations are 0.4382 for females and 0.3918 for males, showing a relatively consistent pattern.",
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers who paid higher fares had better survival rates.",
+      "evidence": {
+        "correlation": 0.2573,
+        "variables": {
+          "Survived": "dependent",
+          "Fare": "independent"
+        }
+      },
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Passengers with siblings or spouses onboard had different survival rates compared to those who traveled alone.",
+      "evidence": {
+        "mean_survival_rate_single_passengers": 0.3454,
+        "mean_survival_rate_with_1_family_member": 0.5359,
+        "mean_survival_rate_with_2_family_members": 0.4643,
+        "mean_survival_rate_with_3_family_members": 0.25,
+        "mean_survival_rate_with_4_family_members": 0.1667,
+        "mean_survival_rate_with_5_family_members": 0.0,
+        "mean_survival_rate_with_8_family_members": 0.0
+      },
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Passengers with different embarkation points had varying survival rates.",
+      "evidence": {
+        "C": {
+          "survival_rate": 0.5536,
+          "passenger_count": 168,
+          "std_dev": 0.4986
+        },
+        "Q": {
+          "survival_rate": 0.3896,
+          "passenger_count": 77,
+          "std_dev": 0.4909
+        },
+        "S": {
+          "survival_rate": 0.337,
+          "passenger_count": 644,
+          "std_dev": 0.473
+        }
+      },
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "Older passengers had different survival rates compared to younger passengers.",
+      "evidence": "The correlation between Age and Survived is -0.0772, suggesting a weak negative relationship.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "There is a relationship between having parents or children onboard (Parch) and survival rates.",
+      "evidence": "Mean survival rates increase when parents or children are onboard, notably with Parch values 1, 2, and 3, compared to 0. The survival rate is highest for Parch = 3 at 60%, and lowest when Parch = 0 at 34.37%.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "Passengers with a cabin number have different survival rates compared to those without a cabin number.",
+      "evidence": "The data provides survival rates for passengers with specific cabin numbers, showing a wide range of mean survival rates from 0.0 to 1.0. This variability indicates differences in survival rates based on cabin data.",
+      "chart_path": null,
+      "confidence": "medium"
+    }
+  ],
+  "visualizations": [],
+  "errors": []
+}

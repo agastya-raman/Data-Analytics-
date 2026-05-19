@@ -1,0 +1,140 @@
+{
+  "timestamp": "20260516_005113",
+  "dataset": "data/raw/titanic.csv",
+  "quality_issues": [
+    {
+      "column": "Age",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": "Age column has 177 missing values (19.87% null).",
+      "proposed_fix": "Impute missing values using median or mean age, or create a separate category for missing ages.",
+      "status": "proposed",
+      "requires_hitl": true
+    },
+    {
+      "column": "Cabin",
+      "issue_type": "missing_values",
+      "severity": "high",
+      "evidence": "Cabin column has 687 missing values (77.1% null).",
+      "proposed_fix": "Consider dropping the column, or impute using a placeholder to indicate missing data.",
+      "status": "proposed",
+      "requires_hitl": true
+    },
+    {
+      "column": "Embarked",
+      "issue_type": "missing_values",
+      "severity": "low",
+      "evidence": "Embarked column has 2 missing values (0.22% null).",
+      "proposed_fix": "Impute missing values with the mode of the Embarked column (likely 'S').",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "PassengerId",
+      "issue_type": "uniqueness",
+      "severity": "low",
+      "evidence": "PassengerId column has 891 unique values; likely intended to be a unique identifier.",
+      "proposed_fix": "Ensure no duplicates exist if more data is added.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Name",
+      "issue_type": "uniqueness",
+      "severity": "low",
+      "evidence": "Name column has 891 unique entries; expected uniqueness confirmed.",
+      "proposed_fix": "No fix required unless new names are added, then ensure uniqueness.",
+      "status": "proposed",
+      "requires_hitl": false
+    },
+    {
+      "column": "Ticket",
+      "issue_type": "inconsistent_formatting",
+      "severity": "medium",
+      "evidence": "Ticket numbers have inconsistent formats, combining alphanumeric and numeric values.",
+      "proposed_fix": "Standardize ticket format to a single style or split into different features if patterns are useful.",
+      "status": "proposed",
+      "requires_hitl": false
+    }
+  ],
+  "cleaning_log": [],
+  "findings": [
+    {
+      "claim": "There is a correlation between Fare and Survived.",
+      "evidence": "The correlation coefficient between Fare and Survived is 0.2573, which indicates a low to moderate positive correlation.",
+      "chart_path": null,
+      "confidence": "medium"
+    },
+    {
+      "claim": "There is a difference in survival rate between different passenger classes.",
+      "evidence": {
+        "class_1": {
+          "survival_rate": 0.6296,
+          "sample_size": 216,
+          "standard_deviation": 0.484
+        },
+        "class_2": {
+          "survival_rate": 0.4728,
+          "sample_size": 184,
+          "standard_deviation": 0.5006
+        },
+        "class_3": {
+          "survival_rate": 0.2424,
+          "sample_size": 491,
+          "standard_deviation": 0.4289
+        }
+      },
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "There is a difference in survival rate between male and female passengers.",
+      "evidence": {
+        "female_survival_rate": 0.742,
+        "male_survival_rate": 0.1889,
+        "female_count": 314,
+        "male_count": 577,
+        "female_std": 0.4382,
+        "male_std": 0.3918
+      },
+      "chart_path": null,
+      "confidence": "high"
+    },
+    {
+      "claim": "There is a difference in survival rate between passengers with and without siblings/spouses aboard.",
+      "evidence": {
+        "mean_survival_rates": {
+          "0_siblings_spouses": 0.3454,
+          "1_sibling_spouse": 0.5359,
+          "2_siblings_spouses": 0.4643,
+          "3_siblings_spouses": 0.25,
+          "4_siblings_spouses": 0.1667,
+          "5_siblings_spouses": 0.0,
+          "8_siblings_spouses": 0.0
+        },
+        "passenger_counts": {
+          "0_siblings_spouses": 608,
+          "1_sibling_spouse": 209,
+          "2_siblings_spouses": 28,
+          "3_siblings_spouses": 16,
+          "4_siblings_spouses": 18,
+          "5_siblings_spouses": 5,
+          "8_siblings_spouses": 7
+        },
+        "standard_deviations": {
+          "0_siblings_spouses": 0.4759,
+          "1_sibling_spouse": 0.4999,
+          "2_siblings_spouses": 0.5079,
+          "3_siblings_spouses": 0.4472,
+          "4_siblings_spouses": 0.3835,
+          "5_siblings_spouses": 0.0,
+          "8_siblings_spouses": 0.0
+        }
+      },
+      "chart_path": null,
+      "confidence": "high"
+    }
+  ],
+  "visualizations": [],
+  "errors": []
+}
