@@ -68,5 +68,3 @@ Upload any CSV file → 8 AI agents automatically:
 | uvicorn | ASGI server |
 
 ---
-
-##  Project Structure
